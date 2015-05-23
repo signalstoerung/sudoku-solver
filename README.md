@@ -13,3 +13,4 @@ It’s more a proof of concept, really, since it requires you to enter the Sudok
 
 ## Licence
 
+GNU GPL (see COPYING.txt)
