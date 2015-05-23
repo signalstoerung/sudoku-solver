@@ -1,5 +1,7 @@
 /*****************************************
 
+	Copyright 2015 Niclas Mika
+
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -44,18 +46,6 @@ void print_board(int board[]){
 	}
 }
 
-void print_numbers(long matches){
-	printf("Match: 0x%03lx (%ld)",matches,matches);
-	printf("Possible numbers: ");
-	for (int i=0; i<9; i++) {
-		long mask = 1 << i;
-		if (mask == (mask & matches)) {
-			printf("%d ",i+1);
-		}
-	}
-	printf("\n");
-}
-
 int convert_bitwise(long matches){
 	for (int i=0; i<9; i++) {
 		long mask = 1 << i;
@@ -76,7 +66,6 @@ long poss_matches(int* board, int position) {
 	int row_offset = row % 3;
 	int column = position % 9;
 	int column_offset = column % 3;
-	int box = floor((double)column / 3.0);
 	
 	// generate possible matches
 	long mask = 0x1FF;
