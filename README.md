@@ -9,7 +9,7 @@ It’s more a proof of concept, really, since it requires you to enter the Sudok
 ## To dos
 
 * Reading from file and writing to file.
-* Generating Sudokus (running the solver on an empty board with a bit of randomness to seed it).
+~~* Generating Sudokus (running the solver on an empty board with a bit of randomness to seed it).~~ DONE!
 
 ## Licence
 
