@@ -185,9 +185,12 @@ int main (int argc, char* argv[]) {
 	int board[81] = { 0 };
 	
 	randomize();
-	for (int i=0; i<7; i++) {
-		int val = (rand() % 9) + 1;
-		board[i*13]=val;
+	for (int i=1; i<10; i++) {
+		int val;
+		do {
+			val = (rand() % 9);
+		} while (board[val]!=0);
+		board[val]=i;
 	}
 
 
