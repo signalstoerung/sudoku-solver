@@ -127,26 +127,6 @@ long poss_matches(int* board, int position) {
 	return mask;
 }
 
-int simple_iterate(int board[]){
-	int found_match = 0;
-	for (int i=0; i<81; i++) {
-		long match = poss_matches(board,i);
-		// http://graphics.stanford.edu/~seander/bithacks.html#DetermineIfPowerOf2
-		// the first half (match &&) evaluates to true if match is not zero (the second half only works for positive numbers)
-		// the second half is a very clever trick. If you subtract 1 from a power of 2 (say, 01000) then all the lower bits flip (00111)
-		// and the first number AND the second number is 0 because no bits are in common. With NOT, it evaluates to TRUE.
-		// If the number is not a power of 2 (say, 01010) then subtracting one will leave some bits in common (01010 & 01001)
-		// so it'll evaluate to TRUE (or FALSE when used in combination with NOT).
-		// three hurrays to all non-zero values evaluating to TRUE.
-		int power_of_two = match && !(match & (match - 1));
-		if (power_of_two) {
-			board[i]=convert_bitwise(match);
-			found_match=1;
-		}
-	}		
-	return found_match;
-}
-
 int check_solution(int board[]){
 	for (int i=0; i<81; i++){
 		if (0==board[i]){
@@ -192,19 +172,6 @@ int recursive_iterate(int board[]){
 
 int main (int argc, char* argv[]) {
 
-					
-/*	int board[81] = {
-					4,2,0,0,7,8,0,3,0,
-					0,0,0,0,0,0,0,4,0,
-					1,3,8,9,0,0,0,0,0,
-					3,9,0,0,4,5,0,0,7,
-					0,0,0,0,9,0,0,0,0,
-					7,0,0,3,1,0,0,5,9,
-					0,0,0,0,0,3,8,6,4,
-					0,1,0,0,0,0,0,0,0,
-					0,4,0,7,5,0,0,9,2
-					}; */
-					
 	int board[81] = { 0 };
 	
 	randomize();
@@ -215,8 +182,6 @@ int main (int argc, char* argv[]) {
 		} while (board[val]!=0);
 		board[val]=i;
 	}
-
-
 			
 	print_board(board);
 	int result = recursive_iterate(board);
