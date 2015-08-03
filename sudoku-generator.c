@@ -62,6 +62,29 @@ int convert_bitwise(long matches){
 	return 0;
 }
 
+int random_convert_bitwise(long matches){
+	int count = 0;
+	int m[10]= { 0 };
+	for (int i=0; i<9; i++) {
+		long mask = 1 << i;
+		if (mask == (mask & matches)) {
+			m[count]=i+1;
+			count++;
+		}
+	}
+	if (count==0) {
+		return 0;
+	} else {
+		int match;
+		int randint=0;
+		do {
+			randint = rand() % 9;
+		} while (m[randint]==0);
+		match=m[randint];
+		return match;
+	}
+}
+
 long poss_matches(int* board, int position) {
 	// only look for matches for empty positions
 	if (board[position]!=0) {
@@ -142,7 +165,7 @@ int recursive_iterate(int board[]){
 				return 0;
 			}
 			while (remaining_matches) {
-				int first_match = convert_bitwise(remaining_matches);
+				int first_match = random_convert_bitwise(remaining_matches);
 				remaining_matches = remaining_matches ^ (1 << (first_match-1));
 				board[i]=first_match;
 				if (check_solution(board)) {
